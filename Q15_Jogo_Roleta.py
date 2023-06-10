@@ -12,7 +12,7 @@ for num in range(20, 31):
 
 palpite = int(input("Diga qual número você acha que vai cair: "))
 print("Girando a roleta...")
-numSort = choice(lista)
+numSort = choice(lista.get_list())
 
 print("3")
 time.sleep(1)
