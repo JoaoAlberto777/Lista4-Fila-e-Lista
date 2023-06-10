@@ -4,7 +4,7 @@ lista = ListaEncadeada()
 
 Cliente = []
 InfoCliente = {}
-Menu = ["1 - Adicionar Cliente", "2 - Remover Cliente", "3 - Pesquisar Cliente na Lista", "4 - Sair"]
+Menu = ["1 - Adicionar Cliente", "2 - Remover Cliente", "3 - Pesquisar Cliente na Lista", "4 - Mostrar todos os Clientes", "5 - Sair"]
 
 for i in range(2):
     nome = str(input(f"Informe o nome do {i+1}° Cliente: "))
@@ -17,7 +17,9 @@ while True:
     print("-----OPÇÕES-----")
     for opção in Menu:
         print(opção)
+        
     op = int(input("Escolha uma opção: "))
+    
     if op == 1:
         nome = input("Informe o nome do cliente: ")
         conta = int(input("Informe o número da conta: "))
@@ -27,13 +29,15 @@ while True:
         print(Cliente)
 
     elif op == 2:
-        if len(Cliente) > 0:
-            index = int(input("Informe o índice do cliente que deseja remover: "))
-            if index >= 0 and index < len(Cliente):
-                Cliente.pop(index)
-                print(Cliente)
-            else:
-                print("Índice inválido!")
+        if Cliente:
+            nome = input("Informe o nome do cliente que deseja remover?: ")
+            found = False
+            for c in Cliente:
+                if c["Nome"] == nome:
+                    Cliente.remove(c)
+                    found = True
+                    print(f"Cliente {c} foi removido da lista: ")
+                
         else:
             print("A lista de clientes está vazia!")
 
@@ -44,15 +48,22 @@ while True:
             for cliente in Cliente:
                 if cliente["Nome"] == nome:
                     found = True
-                    print("Cliente encontrado:")
-                    print("|   NOME   |   CONTA   |   SALDO   |")
-                    print("|", cliente["Nome"].ljust(9), "|", str(cliente["Conta"]).ljust(9), "|", str(cliente["Saldo"]).ljust(9), "|")
+                    print("Cliente esta na lista:")
+                    print("|NOME| CONTA |   SALDO   |")
+                    print("| {} |  {}   |    {}    |".format(cliente["Nome"], (cliente["Conta"]), (cliente["Saldo"])))
                     break
             if not found:
-                print("Cliente não encontrado!")
+                print("Cliente não esta na lista!")
         else:
             print("A lista de clientes está vazia!")
     elif op == 4:
+        print("Lista de clientes:")
+        print("|   NOME   |   CONTA   |   SALDO   |")
+        for cliente in Cliente:
+            print("|   {}   |    {}      |    {}    |".format(cliente["Nome"], (cliente["Conta"]), (cliente["Saldo"])))
+        else:
+            print("A lista de clientes está vazia!")
+    elif op == 5:
         print("Programa Encerrado!!")
         break
    
